@@ -7,6 +7,7 @@ on:
 env:
   PROJECT_ID: vivid-poet-373515
   IMAGE: configuration-api
+  DOCKER_BUILD_PUSH: true
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
