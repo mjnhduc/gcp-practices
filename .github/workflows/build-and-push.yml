@@ -19,10 +19,16 @@ jobs:
       uses: docker/setup-buildx-action@v1
 
     - name: Login to Google Cloud Platform
-      uses: google-github-actions/setup-gcloud@v0.2.0
+      uses: google-github-actions/setup-gcloud@v0.4.3
       with:
         project_id: ${{ env.PROJECT_ID }}
         service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
+        export_default_credentials: true
+        
+    - name: Configure Docker
+      run: |
+        echo ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }} | base64 -d > key.json
+        docker login -u _json_key --password-stdin https://gcr.io < key.json
         
     - name: Check if Dockerfile exists
       run: |
