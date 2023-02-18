@@ -21,7 +21,7 @@ jobs:
     - name: Login to Google Cloud Platform
       uses: google-github-actions/setup-gcloud@v0.2.0
       with:
-        project_id: ${{ PROJECT_ID }}
+        project_id: ${{ env.PROJECT_ID }}
         service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
         
     - name: Check if Dockerfile exists
@@ -35,6 +35,6 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile
+        file: ./src/ConfigurationApi/Dockerfile
         push: true
-        tags: gcr.io/${{ PROJECT_ID }}/${{ IMAGE }}:${{ github.sha }}
+        tags: gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}
