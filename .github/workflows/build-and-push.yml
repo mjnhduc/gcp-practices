@@ -37,4 +37,4 @@ jobs:
         context: .
         file: ${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile
         push: true
-        tags: gcr.io/${{ env.PROJECT_ID }}/${{ IMAGE }}:${{ github.sha }}
+        tags: gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:${{ github.sha }}
