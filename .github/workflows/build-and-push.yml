@@ -36,7 +36,7 @@ jobs:
     - name: Check if Dockerfile exists
       run: |
         if [ ! -f "${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile" ]; then
-          echo "Dockerfile not found at ${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile"
+          echo "Dockerfile not found at ${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile. Please check again"
           exit 1
         fi
         
