@@ -23,11 +23,18 @@ jobs:
       with:
         project_id: ${{ PROJECT_ID }}
         service_account_key: ${{ secrets.GCR_SERVICE_ACCOUNT_KEY }}
-
+        
+    - name: Check if Dockerfile exists
+      run: |
+        if [ ! -f "${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile" ]; then
+          echo "Dockerfile not found at ${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile"
+          exit 1
+        fi
+        
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./src/ConfigurationApi/Dockerfile
+        file: ${GITHUB_WORKSPACE}/src/ConfigurationApi/Dockerfile
         push: true
         tags: gcr.io/${{ PROJECT_ID }}/${{ IMAGE }}:${{ github.sha }}
